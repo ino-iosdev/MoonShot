@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct HorizontalScrollview: View {
+    let crew: [MissionView.CrewMember]
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -44,5 +45,16 @@ struct HorizontalScrollview: View {
 }
 
 #Preview {
-    HorizontalScrollview(mission: Mission, astronauts: <#[String : Astronaut]#>)
+    let missions: [Mission] = Bundle.main.decode("missions.json")
+    let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
+    let firstMission = missions[0]
+    let crew = firstMission.crew.map { member in
+        if let astronaut = astronauts[member.name] {
+            return MissionView.CrewMember(role: member.role, astronaut: astronaut)
+        } else {
+            fatalError("Missing \(member.name)")
+        }
+    }
+    return HorizontalScrollview(crew: crew)
+        .preferredColorScheme(.dark)
 }

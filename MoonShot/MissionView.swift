@@ -33,10 +33,7 @@ struct MissionView: View {
                     Text("Launch Date: \(mission.launchDate?.formatted(.dateTime.day().month().year()) ?? "N/A")")
                         .font(.caption)
                     
-                    Rectangle()
-                        .frame(height: 2)
-                        .foregroundStyle(.lightBackground)
-                        .padding(.vertical)
+                    RectangleDividerView()
                     
                     Text("Mission Highlights")
                         .font(.title.bold())
@@ -52,6 +49,8 @@ struct MissionView: View {
                     Text("Crew")
                         .font(.title.bold())
                         .padding(.bottom, 5)
+                    
+                    HorizontalScrollview(crew: crew)
                 }
                 .padding(.horizontal)
                 
