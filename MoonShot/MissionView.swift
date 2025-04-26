@@ -26,12 +26,11 @@ struct MissionView: View {
                         width * 0.6
                     }
                 
-                    .padding()
+                if let date = mission.launchDate {
+                    Label(date.formatted(date: .complete, time: .omitted), systemImage: "calendar")
+                }
 
                 VStack(alignment: .center) {
-                    
-                    Text("Launch Date: \(mission.launchDate?.formatted(.dateTime.day().month().year()) ?? "N/A")")
-                        .font(.caption)
                     
                     RectangleDividerView()
                     
