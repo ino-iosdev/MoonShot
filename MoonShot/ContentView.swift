@@ -8,23 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showingGrid = true
+    @State private var showingGrid = false
     
     let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
     let missions: [Mission] = Bundle.main.decode("missions.json")
     
     var body: some View {
         NavigationStack {
-            Group {
-                if showingGrid {
-                    GridLayoutView(astronauts: astronauts, missions: missions)
-                } else {
-                    ListLayoutView(astronauts: astronauts, missions: missions)
+            VStack {
+                Group {
+                    if showingGrid {
+                        GridLayoutView(astronauts: astronauts, missions: missions)
+                    } else {
+                        ListLayoutView(astronauts: astronauts, missions: missions)
+                    }
                 }
+                .navigationTitle("MoonShot")
+                .background(.darkBackground)
+                .preferredColorScheme(.dark)
             }
-            .navigationTitle("Moonshot")
-            .background(.darkBackground)
-            .preferredColorScheme(.dark)
             .toolbar {
                 Button {
                     showingGrid.toggle()

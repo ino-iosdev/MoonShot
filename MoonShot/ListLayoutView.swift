@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ListLayoutView: View {
-    let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
-    let missions: [Mission] = Bundle.main.decode("missions.json")
+    let astronauts: [String: Astronaut]
+    let missions: [Mission]
     
     var body: some View {
         List {
@@ -34,8 +34,8 @@ struct ListLayoutView: View {
                                 .foregroundStyle(.white.opacity(0.5))
                         }
                     }
-                    .listRowBackground(Color.darkBackground)
                 }
+                .listRowBackground(Color.darkBackground)
             }
         }
         .listStyle(.plain)
@@ -43,6 +43,8 @@ struct ListLayoutView: View {
 }
 
 #Preview {
-    ListLayoutView()
+    let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
+    let missions: [Mission] = Bundle.main.decode("missions.json")
+    return ListLayoutView(astronauts: astronauts, missions: missions)
         .preferredColorScheme(.dark)
 }

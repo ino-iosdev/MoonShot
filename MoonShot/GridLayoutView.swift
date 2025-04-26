@@ -16,6 +16,7 @@ struct GridLayoutView: View {
     ]
     
     var body: some View {
+        ScrollView {
             LazyVGrid(columns: columns) {
                 ForEach(missions) { mission in
                     NavigationLink {
@@ -25,7 +26,7 @@ struct GridLayoutView: View {
                             Image(mission.image)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 100, height: 100)
+                                .frame(width: 80, height: 80)
                                 .padding()
                             
                             VStack {
@@ -49,9 +50,10 @@ struct GridLayoutView: View {
                     }
                 }
             }
-                .padding([.horizontal, .bottom])
-            }
+            .padding([.horizontal, .bottom])
         }
+    }
+}
 
 #Preview {
     let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
